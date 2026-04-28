@@ -1,7 +1,5 @@
 # Authoring Terrestrial Planets with Diffusion Models
 
-Forked from "Evaluating Diffusion Models for Terrain Generation"
-
 This repository should be cloned with:
 ```sh
 git clone git@github.com:Oliver-Borg/PlanetDiffusion.git
@@ -137,5 +135,3 @@ for ot in "${output_types[@]}"; do
     done
 done
 ```
-
-
