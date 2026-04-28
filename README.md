@@ -1,4 +1,4 @@
-# Planet Authoring with Generative AI
+# Authoring Terrestrial Planets with Diffusion Models
 
 Forked from "Evaluating Diffusion Models for Terrain Generation"
 
