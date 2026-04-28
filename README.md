@@ -4,15 +4,8 @@ Forked from "Evaluating Diffusion Models for Terrain Generation"
 
 This repository should be cloned with:
 ```sh
-git clone --recurse-submodules git@github.com:Oliver-Borg/terrain-ml.git
+git clone git@github.com:Oliver-Borg/PlanetDiffusion.git
 ```
-if the submodule fails to clone, you can instead do:
-```sh
-git clone git@github.com:Oliver-Borg/terrain-ml.git
-cd terrain-ml
-git clone git@github.com:Oliver-Borg/planetAI.git
-```
-This will install the planetAI submodule and all required training data for size 5.
 
 ## Setup
 
