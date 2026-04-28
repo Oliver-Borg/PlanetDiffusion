@@ -1,0 +1,9 @@
+# Ignore everything except sh scripts and gitignore
+*
+!.gitignore
+!*mapping*.txt
+!precip*
+!*.png
+!*.tif
+!sketch_counts.txt
+*21600x10800*

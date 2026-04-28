@@ -1,0 +1,52 @@
+
+# A list of constants that the user may change
+
+USA_FROM = (51.3263049580546, -129.45026666980615)  # top_left
+USA_TO = (22.450980323068656, -56.93530307865615)  # bottom_right
+USA_BOUNDARY = (USA_FROM, USA_TO)
+
+# http://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer?f=json
+# https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/?f=json
+LODS = {
+    # zoom_level: (resolution, scale)
+    0: (156543.03392800014, 591657527.591555),
+    1: (78271.51696399994, 295828763.795777),
+    2: (39135.75848200009, 147914381.897889),
+    3: (19567.87924099992, 73957190.948944),
+    4: (9783.93962049996, 36978595.474472),
+    5: (4891.96981024998, 18489297.737236),
+    6: (2445.98490512499, 9244648.868618),
+    7: (1222.992452562495, 4622324.434309),
+    8: (611.4962262813797, 2311162.217155),
+    9: (305.74811314055756, 1155581.108577),
+    10: (152.87405657041106, 577790.554289),
+    11: (76.43702828507324, 288895.277144),
+    12: (38.21851414253662, 144447.638572),
+    13: (19.10925707126831, 72223.819286),
+    14: (9.554628535634155, 36111.909643),
+    15: (4.77731426794937, 18055.954822),
+    16: (2.388657133974685, 9027.977411),
+    17: (1.1943285668550503, 4513.988705),
+    18: (0.5971642835598172, 2256.994353),
+    19: (0.29858214164761665, 1128.497176),
+    20: (0.14929107082380833, 564.248588),
+    21: (0.07464553541190416, 282.124294),
+    22: (0.03732276770595208, 141.062147),
+    23: (0.01866138385297604, 70.5310735)
+}
+
+# Specify maximum zoom levels
+MAX_ELEVATION_LEVEL = 16
+MAX_SATELLITE_LEVEL = 23
+
+# Controls degrees of freedom when converting between elevation and derivative
+GRAD_DOF = 1
+
+# Folder and file names
+VALID_ELEVATION_DIR_NAME = 'valid'
+INVALID_ELEVATION_FILE_NAME = 'invalid_list.txt'
+
+# Extensions
+NP_EXT = 'npz'  # Change to npy if uncompressed
+PNG_EXT = 'png'
+JPG_EXT = 'jpg'

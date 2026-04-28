@@ -1,0 +1,11 @@
+.vscode
+dataset/
+__pycache__
+*.png
+paleo_tifs/
+paleo_test/
+profile_*
+*Zone.Identifier
+*.lprof
+eval/
+profiling/

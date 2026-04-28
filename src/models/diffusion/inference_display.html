@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inference display</title>
+    <script>
+        function updateImage() {
+            var dem_img = document.getElementById('dem-image');
+            dem_img.src = '../../../data/evaluation/inputs/dem_output.png?' + new Date().getTime(); // Adding a timestamp to force image refresh
+            var sat_img = document.getElementById('sat-image');
+            sat_img.src = '../../../data/evaluation/inputs/sat_output.png?' + new Date().getTime(); // Adding a timestamp to force image refresh
+            var sketch_img = document.getElementById('sketch-image');
+            sketch_img.src = '../../../data/evaluation/inputs/real_modal_sketch.png?' + new Date().getTime(); // Adding a timestamp to force image refresh
+            var generated_mask = document.getElementById('generated-mask');
+            generated_mask.src = '../../../data/evaluation/inputs/generated_mask.png?' + new Date().getTime(); // Adding a timestamp to force image refresh
+        }
+        setInterval(updateImage, 500);
+    </script>
+</head>
+<body>
+    <h1>Diffusion Model Inference Display</h1>
+    <img id="sat-image" src="../../../data/evaluation/inputs/sat_output.png" alt="SAT Output" width="100%">
+    <img id="dem-image" src="../../../data/evaluation/inputs/dem_output.png" alt="DEM Output" width="100%">
+    <img id="sketch-image" src="../../../data/evaluation/inputs/real_modal_sketch.png" alt="DEM Output" width="100%">
+    <img id="generated-mask" src="../../../data/evaluation/inputs/generated_mask.png" alt="Generated Mask" width="100%">
+</body>
+</html>
