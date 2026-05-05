@@ -1,5 +1,6 @@
 # Authoring Terrestrial Planets with Diffusion Models
 http://doi.org/10.1111/cgf.70390
+
 This repository should be cloned with:
 ```sh
 git clone git@github.com:Oliver-Borg/PlanetDiffusion.git
