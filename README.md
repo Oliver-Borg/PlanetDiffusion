@@ -38,6 +38,8 @@ python -m src.interface.view --data_dir ./planetAI/data --size 5 --downscale_off
 `downscale_offset` is the number of steps down to the sketch size. This is used to set the resolution of the sketch.
 `diffusion_model_dir` is the directory containing the diffusion model to use.
 
+*Note:* We have recently optimized the inference pipeline significantly and added support for multi-GPU inference. These updates will be released soon.
+
 ## Training
 
 To train run the following command: 
