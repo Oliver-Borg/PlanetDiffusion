@@ -870,7 +870,7 @@ class Controller:
         river_efficiency = self.river_stack[:, :, 5]
         river_efficiency = cv2.resize(river_efficiency, (manual_weights.shape[::-1]), interpolation=cv2.INTER_NEAREST)
 
-        self.quad_river_upa, normal_river_upa = derive_sketch_rivers(
+        self.quad_river_upa, self.normal_river_upa = derive_sketch_rivers(
             SketchArgs(
                 self.dem_sketch,
                 self.landcover,
@@ -886,7 +886,7 @@ class Controller:
             resolution_scale=0.5,
         )
         self.river_upa_max = self.quad_river_upa.max()
-        self.river_stack[:, :, 3] = normal_river_upa[:, :]
+        self.river_stack[:, :, 3] = self.normal_river_upa[:, :]
         self.refresh_display()
         return
 
