@@ -1,0 +1,1089 @@
+{
+    "default" : {
+        "planet_config": {
+            "image_mode": "planet",
+            "size": 2,
+            "downscale_offset": 2,
+            "discrete_rivers": false,
+            "sketch_lod_levels": 0,
+            "use_mars_data": true,
+            "river_upa_mode": "channel",
+            "river_upa_variance_chance": 0.0,
+            "river_upa_dropout_chance": 0.0,
+            "max_temp_variance": 0,
+            "max_blur_amount": null,
+            "max_blur_radius": 0,
+            "embedding_type": "disabled"
+        },
+        "upscaling_config": {
+            "image_mode": "sat-upscaling",
+            "size": 5,
+            "downscale_offset": 3,
+            "sketch_lod_levels": 0,
+            "use_mars_data": true,
+            "river_upa_mode": "channel",
+            "river_upa_variance_chance": 0.0,
+            "river_upa_dropout_chance": 0.0,
+            "max_temp_variance": 0,
+            "max_blur_amount": null,
+            "max_blur_radius": 0,
+            "embedding_type": "disabled"
+        },
+        "inference_args": {
+            "seed": null,
+            "timesteps": 100,
+            "compile_model": false,
+            "batch_size": 64,
+            "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+            "output_folder": "evaluation",
+            "tile_size": 64,
+            "grid_align": 1,
+            "use_previous": false,
+            "erode_masks": true,
+            "use_water_mask": true,
+            "use_jigsaw_grid": false,
+            "sketch_injection": false,
+            "use_rough_edge_mask": true,
+            "do_upscaling": false
+        },
+        "upscaling_args": {
+            "seed": null,
+            "timesteps": 100,
+            "compile_model": false,
+            "batch_size": 8,
+            "diffusion_model_dir": "Upscaling-2-5-mae",
+            "output_folder": "evaluation",
+            "wandb_artifact_version": 44,
+            "tile_size": 256,
+            "grid_align": 1,
+            "use_previous": false,
+            "erode_masks": true,
+            "use_water_mask": true,
+            "use_jigsaw_grid": false,
+            "use_rough_edge_mask": true,
+            "do_upscaling": true,
+            "sketch_injection": false
+        },
+        "experiment": {
+            "output_size": 256,
+            "seed": 0,
+            "mars": false,
+            "shuffle_landcover": false,
+            "temp_variance": 0,
+            "do_upscaling": false,
+            "real_sketches": false,
+            "resize_factor": 1.0
+        }
+    },
+    "experiments": {
+        "empty": {
+            "planet_config": {},
+            "upscaling_config": {},
+            "inference_args": {},
+            "upscaling_args": {},
+            "experiment": {}
+        },
+        "Planet-size-2": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "none"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-2",
+                "diffusion_model_dir": "Planet-size-2",
+                "wandb_artifact_version": 34
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Planet-size-2-real": {
+            "inference_args": {
+                "output_folder": "Planet-size-2-real",
+                "tile_size": 256,
+                "timesteps": 100,
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-2"
+            }
+        },
+        "Planet-size-3": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "none",
+                "size": 3,
+                "downscale_offset": 3
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-3",
+                "diffusion_model_dir": "Planet-size-3",
+                "wandb_artifact_version": 36,
+                "tile_size": 256,
+                "timesteps": 100,
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": 256
+            }
+        },
+        "Planet-size-3-upscaling": {
+            "inference_args": {
+                "output_folder": "Planet-size-3-upscaling",
+                "guidance_scale": 1.0
+            },
+            "upscaling_config": {
+                "image_mode": "sat-upscaling",
+                "size": 5,
+                "downscale_offset": 3,
+                "river_upa_mode": "channel",
+                "embedding_type": "one-hot"
+            },
+            "upscaling_args": {
+                "output_folder": "Planet-size-3-upscaling",
+                "diffusion_model_dir": "Upscaling-2-5-new",
+                "wandb_artifact_version": 61,
+                "timesteps": 100,
+                "guidance_channel": 4,
+                "guidance_scale": 3.0,
+                "tile_size": 256
+            },
+            "experiment": {
+                "do_upscaling": true,
+                "resize_factor": 0.5,
+                "parent": "Planet-size-3"
+            }
+        },
+        "Planet-size-3-real": {
+            "inference_args": {
+                "output_folder": "Planet-size-3-real"
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-3"
+            }
+        },
+        "Planet-size-3-upscaling-real": {
+            "upscaling_config": {
+                "max_blur_radius": [1, 5, 10]
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-3-upscaling"
+            }
+        },
+        "Planet-size-2-rivers": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-2-rivers",
+                "diffusion_model_dir": "Planet-size-2-rivers",
+                "wandb_artifact_version": 41,
+                "guidance_scale": 3.0,
+                "guidance_channel": 3
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Planet-size-2-rgb": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "none"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-2-rgb",
+                "diffusion_model_dir": "Planet-size-2-rgb",
+                "wandb_artifact_version": 40
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Planet-size-2-rgb-rivers": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-2-rgb-rivers",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+                "wandb_artifact_version": 42,
+                "guidance_channel": 5,
+                "guidance_scale": 3.0
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Coarse-tiles": {
+            "inference_args": {
+                "output_folder": "Coarse-tiles",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": [1.0, 2.0, 3.0]
+            },
+            "experiment": {
+                "parent": "Planet-size-2-rgb-rivers",
+                "output_size": 64
+            }
+        },
+        "Coarse-blended": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Coarse-blended",
+                "timesteps": [10, 25, 50, 100, 250],
+                "use_rough_edge_mask": [true, false]
+            },
+            "experiment": {
+                "parent": "Planet-size-2-rgb-rivers",
+                "output_size": 256
+            }
+        },
+        "Coarse-real": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Coarse-real",
+                "timesteps": 100,
+                "use_rough_edge_mask": true
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-2-rgb-rivers"
+            }
+        },
+        "Planet-size-2-rgb-rivers-real": {
+            "inference_args": {
+                "output_folder": "Planet-size-2-rgb-rivers-real",
+                "tile_size": 256,
+                "timesteps": 100,
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-2-rgb-rivers"
+            }
+        },
+        "Planet-size-2-rgb-rivers-mae": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-2-rgb-rivers-mae",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers-mae",
+                "wandb_artifact_version": 49,
+                "guidance_channel": 5,
+                "batch_size": 64,
+                "guidance_scale": 3.0
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Sat-size-2": {
+            "planet_config": {
+                "image_mode": "sat",
+                "river_upa_mode": "none"
+            },
+            "inference_args": {
+                "output_folder": "Sat-size-2",
+                "diffusion_model_dir": "Sat-size-2",
+                "wandb_artifact_version": 12
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Sat-size-2-90-deg": {
+            "planet_config": {
+                "image_mode": "sat",
+                "river_upa_mode": "none"
+            },
+            "inference_args": {
+                "output_folder": "Sat-size-2-90-deg",
+                "diffusion_model_dir": "Sat-size-2-90-deg",
+                "wandb_artifact_version": 29
+            },
+            "experiment": {
+                "output_size": 64
+            }
+        },
+        "Sat-size-2-90-deg-real": {
+            "inference_args": {
+                "output_folder": "Sat-size-2-90-deg-real",
+                "tile_size": 256,
+                "timesteps": 100,
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Sat-size-2-90-deg"
+            }
+        },
+        "Sat-size-5-injected": {
+            "planet_config": {
+                "image_mode": "sat",
+                "size": 5,
+                "downscale_offset": 5,
+                "river_upa_mode": "injected"
+            },
+            "inference_args": {
+                "output_folder": "Sat-size-5-injected",
+                "diffusion_model_dir": "Sat-size-5-injected",
+                "batch_size": 8,
+                "wandb_artifact_version": 46,
+                "timesteps": 100,
+                "tile_size": 256
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": false
+            }
+        },
+        "Injected-real": {
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Sat-size-5-injected"
+            }
+        },
+        "Sat-size-5": {
+            "planet_config": {
+                "image_mode": "sat",
+                "size": 5,
+                "downscale_offset": 5,
+                "river_upa_mode": "none"
+            },
+            "inference_args": {
+                "output_folder": "Sat-size-5-mars",
+                "diffusion_model_dir": "Sat-size-5-mars",
+                "batch_size": 8,
+                "wandb_artifact_version": null,
+                "timesteps": 100,
+                "tile_size": 256
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": false
+            }
+        },
+        "Sat-size-5-real": {
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Sat-size-5"
+            }
+        },
+        "Upscaling-2-5-mae": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Upscaling-2-5-mae-new",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+                "wandb_artifact_version": 42,
+                "batch_size": 8,
+                "guidance_channel": 5,
+                "guidance_scale": 3.0,
+                "tile_size": 32
+            },
+            "upscaling_config": {
+                "image_mode": "sat-upscaling",
+                "size": 5,
+                "downscale_offset": 3,
+                "river_upa_mode": "channel",
+                "embedding_type": "one-hot"
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-2-5-mae-new",
+                "diffusion_model_dir": "Upscaling-2-5-new",
+                "wandb_artifact_version": 61,
+                "batch_size": 8,
+                "timesteps": 100,
+                "guidance_channel": 4,
+                "guidance_scale": 3.0,
+                "tile_size": 256
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": true
+            }
+        },
+        "Upscaling-tiles": {
+            "inference_args": {
+                "output_folder": "Upscaling-tiles",
+                "guidance_scale": [1.0, 3.0]
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-tiles",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": [1.0, 2.0, 3.0]
+            },
+            "experiment": {
+                "parent": "Upscaling-2-5-mae",
+                "output_size": 256
+            }
+        },
+        "Upscaling-blended-2": {
+            "inference_args": {
+                "output_folder": "Upscaling-blended-2",
+                "guidance_scale": 3.0
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-blended-2",
+                "timesteps": [100],
+                "use_rough_edge_mask": [true, false]
+            },
+            "experiment": {
+                "parent": "Upscaling-2-5-mae",
+                "output_size": 1024
+            }
+        },
+        "Upscaling-blended-3": {
+            "inference_args": {
+                "output_folder": "Upscaling-blended-3",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+                "wandb_artifact_version": 42
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-blended-3"
+            },
+            "experiment": {
+                "parent": "Upscaling-blended-2",
+                "resize_factor": 0.5,
+                "output_size": 1024
+            }
+        },
+        "Upscaling-2-5-mae-large": {
+            "inference_args": {
+                "batch_size": 32,
+                "tile_size": 64,
+                "output_folder": "Upscaling-2-5-mae-large"
+            },
+            "upscaling_args": {
+                "batch_size": 8,
+                "tile_size": 256,
+                "guidance_scale": 3.0,
+                "output_folder": "Upscaling-2-5-mae-large"
+            },
+            "experiment": {
+                "output_size": 1024,
+                "parent": "Upscaling-2-5-mae"
+            }
+
+        },
+        "Upscaling-2-5-mae-real": {
+            "upscaling_config": {
+                "max_blur_radius": [10],
+                "max_blur_amount": null
+            },
+            "inference_args": {
+                "batch_size": 32,
+                "tile_size": 64,
+                "timesteps": 25,
+                "output_folder": "Upscaling-2-5-mae-real"
+            },
+            "upscaling_args": {
+                "batch_size": 8,
+                "timesteps": 25,
+                "tile_size": 256,
+                "guidance_scale": [1.5, 3.0],
+                "output_folder": "Upscaling-2-5-mae-real"
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Upscaling-2-5-mae"
+            }
+        },
+        "Upscaling-real": {
+            "upscaling_config": {
+                "max_blur_radius": [0, 5, 10],
+                "max_blur_amount": null
+            },
+            "inference_args": {
+                "batch_size": 32,
+                "tile_size": 64,
+                "timesteps": 100,
+                "guidance_scale": 3.0,
+                "output_folder": "Upscaling-real"
+            },
+            "upscaling_args": {
+                "batch_size": 8,
+                "timesteps": 100,
+                "tile_size": 256,
+                "guidance_scale": 3.0,
+                "output_folder": "Upscaling-real"
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Upscaling-2-5-mae"
+            }
+        },
+        "Upscaling-2-5-real": {
+            "upscaling_config": {
+                "max_blur_radius": [1, 2, 3],
+                "max_blur_amount": null
+            },
+            "inference_args": {
+                "batch_size": 32,
+                "tile_size": 64,
+                "timesteps": 100,
+                "output_folder": "Upscaling-2-5-real"
+            },
+            "upscaling_args": {
+                "batch_size": 8,
+                "timesteps": 25,
+                "tile_size": 256,
+                "guidance_scale": 3.0,
+                "output_folder": "Upscaling-2-5-real"
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Upscaling-2-5"
+            }
+        },
+        "Upscaling-2-5-mae-real-dual": {
+            "upscaling_args": {
+                "dual_model_upscale_weight": [0.0, 0.25, 0.5, 0.75, 1.0]
+            },
+            "experiment": {
+                "parent": "Upscaling-2-5-mae-real"
+            }
+
+        },
+        "Upscaling-2-5-weighted": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Upscaling-2-5-weighted",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+                "wandb_artifact_version": 42,
+                "guidance_channel": 5,
+                "guidance_scale": 3.0,
+                "tile_size": 32
+            },
+            "upscaling_config": {
+                "image_mode": "sat-upscaling",
+                "size": 5,
+                "downscale_offset": 3,
+                "river_upa_mode": "channel"
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-2-5-weighted",
+                "diffusion_model_dir": "Upscaling-2-5-weighted",
+                "tile_size": 256,
+                "wandb_artifact_version": 50,
+                "timesteps": 100,
+                "guidance_channel": 4,
+                "guidance_scale": 3.0
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": true
+            }
+        },
+        "Upscaling-2-5-weighted-timesteps": {
+            "upscaling_args": {
+                "timesteps": [10, 25, 100, 250]
+            },
+            "experiment": {
+                "parent": "Upscaling-2-5-weighted"
+            }
+
+        },
+        "Upscaling-2-5-weighted-guidance": {
+            "upscaling_args": {
+                "guidance_scale": [1.0, 1.5, 3.0, 5.0]
+            },
+            "experiment": {
+                "parent": "Upscaling-2-5-weighted"
+            }
+
+        },
+        "Upscaling-2-5": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": true,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Upscaling-2-5-new",
+                "diffusion_model_dir": "Planet-size-2-rgb-rivers",
+                "wandb_artifact_version": 42,
+                "guidance_channel": 5,
+                "guidance_scale": 3.0,
+                "tile_size": 32
+            },
+            "upscaling_config": {
+                "image_mode": "sat-upscaling",
+                "size": 5,
+                "downscale_offset": 3,
+                "river_upa_mode": "channel"
+            },
+            "upscaling_args": {
+                "output_folder": "Upscaling-2-5-new",
+                "diffusion_model_dir": "Upscaling-2-5",
+                "wandb_artifact_version": 33,
+                "timesteps": 100,
+                "guidance_channel": 4,
+                "guidance_scale": 3.0,
+                "tile_size": 256
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": true
+            }
+        },
+        "Planet-size-5-fine-tuned": {
+            "planet_config": {
+                "image_mode": "planet",
+                "size": 5,
+                "discrete_rivers": true,
+                "downscale_offset": 5,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-5-fine-tuned",
+                "diffusion_model_dir": "Planet-size-5-new",
+                "tile_size": 256,
+                "batch_size": 8,
+                "wandb_artifact_version": 62,
+                "guidance_channel": 3,
+                "guidance_scale": 3.0,
+                "timesteps": 100
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": false
+            }
+        },
+        "PlanetDiffusion": {
+            "planet_config": {
+                "image_mode": "planet",
+                "size": 5,
+                "discrete_rivers": true,
+                "downscale_offset": 5,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "PlanetDiffusion",
+                "diffusion_model_dir": "PlanetDiffusion",
+                "tile_size": 256,
+                "batch_size": 8,
+                "wandb_artifact_version": 45,
+                "guidance_channel": 3,
+                "guidance_scale": 3.0,
+                "sketch_injection": true,
+                "timesteps": 100
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": false
+            }
+        },
+        "Planet-size-5-control": {
+            "planet_config": {
+                "image_mode": "planet",
+                "size": 5,
+                "discrete_rivers": true,
+                "downscale_offset": 5,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Planet-size-5-control",
+                "diffusion_model_dir": "Planet-size-5-control-latest",
+                "tile_size": 256,
+                "batch_size": 8,
+                "wandb_artifact_version": 64,
+                "guidance_channel": 3,
+                "guidance_scale": 3.0,
+                "sketch_injection": true,
+                "timesteps": 100
+            },
+            "experiment": {
+                "output_size": 256,
+                "do_upscaling": false
+            }
+        },
+        "Control-embedding": {
+            "planet_config": {
+                "embedding_type": "one-hot"
+            },
+            "experiment": {
+                "parent": "Planet-size-5-control"
+            }
+        },
+        "Control-real": {
+            "inference_args": {
+                "output_folder": "Control-real",
+                "tile_size": 256,
+                "timesteps": [100, 250],
+                "guidance_scale": [2.0, 1.5],
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-5-control"
+            }
+        },
+        "Control-real-guidance": {
+            "inference_args": {
+                "output_folder": "Control-real-guidance",
+                "timesteps": 100,
+                "guidance_scale": [1.0, 1.5, 2.0, 2.5, 3.0]
+            },
+            "experiment": {
+                "parent": "Control-real"
+            }
+        },
+        "Control-tiles": {
+            "inference_args": {
+                "output_folder": "Control-tiles",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": 3.0
+            },
+            "experiment": {
+                "parent": "Planet-size-5-control",
+                "output_size": 256
+            }
+        },
+        "Control-tiles-guidance": {
+            "inference_args": {
+                "output_folder": "Control-tiles-guidance",
+                "timesteps": 100,
+                "guidance_scale": [1.0, 1.5, 2.0, 2.5, 3.0]
+            },
+            "experiment": {
+                "parent": "Planet-size-5-control",
+                "output_size": 256
+            }
+        },
+        "Control-palette": {
+            "inference_args": {
+                "output_folder": "Control-palette",
+                "timesteps": [100],
+                "guidance_scale": [1.0]
+            },
+            "experiment": {
+                "parent": "Planet-size-5-control",
+                "output_size": 256,
+                "palette_test": true
+            }
+        },
+        "Control-blended": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Control-blended",
+                "timesteps": [100],
+                "use_rough_edge_mask": [true, false]
+            },
+            "experiment": {
+                "parent": "Planet-size-5-control",
+                "output_size": 1024
+            }
+        },
+        "Control-blended-25": {
+            "inference_args": {
+                "output_folder": "Control-blended-25",
+                "timesteps": [10, 25]
+            },
+            "experiment": {
+                "parent": "Control-blended"
+            }
+        },
+        "Control-blended-50": {
+            "inference_args": {
+                "output_folder": "Control-blended-50",
+                "timesteps": [50]
+            },
+            "experiment": {
+                "parent": "Control-blended"
+            }
+        },
+        "Control-blended-100-regular": {
+            "inference_args": {
+                "output_folder": "Control-blended-100-regular",
+                "use_rough_edge_mask": false,
+                "timesteps": [100]
+            },
+            "experiment": {
+                "parent": "Control-blended"
+            }
+        },
+        "Control-blended-100-irregular": {
+            "inference_args": {
+                "output_folder": "Control-blended-100-irregular",
+                "use_rough_edge_mask": true,
+                "timesteps": [100]
+            },
+            "experiment": {
+                "parent": "Control-blended"
+            }
+        },
+        "Control-blended-250": {
+            "inference_args": {
+                "output_folder": "Control-blended-250",
+                "timesteps": [250]
+            },
+            "experiment": {
+                "parent": "Control-blended"
+            }
+        },
+        "Fine-tiles": {
+            "inference_args": {
+                "output_folder": "Fine-tiles",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": [1.0, 2.0, 3.0]
+            },
+            "experiment": {
+                "parent": "Planet-size-5-fine-tuned",
+                "output_size": 256
+            }
+        },
+        "Old-tiles": {
+            "inference_args": {
+                "output_folder": "Old-tiles",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": [1.0, 2.0, 3.0]
+            },
+            "experiment": {
+                "parent": "PlanetDiffusion",
+                "output_size": 256
+            }
+        },
+        "Old-tiles-random": {
+            "inference_args": {
+                "output_folder": "Old-tiles-random",
+                "timesteps": [10, 25, 50, 100, 250],
+                "guidance_scale": [1.0, 2.0, 3.0]
+            },
+            "experiment": {
+                "parent": "PlanetDiffusion",
+                "shuffle_landcover": true,
+                "output_size": 256
+            }
+        },
+        "Old-palette": {
+            "inference_args": {
+                "output_folder": "Old-palette",
+                "timesteps": [100],
+                "guidance_scale": [1.0]
+            },
+            "experiment": {
+                "parent": "PlanetDiffusion",
+                "output_size": 256,
+                "palette_test": true
+            }
+        },
+        "Fine-blended": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Fine-blended",
+                "timesteps": [100],
+                "use_rough_edge_mask": [true, false]
+            },
+            "experiment": {
+                "parent": "Planet-size-5-fine-tuned",
+                "output_size": 1024
+            }
+        },
+        "Old-blended": {
+            "planet_config": {
+                "image_mode": "planet",
+                "rgb_landcover": false,
+                "river_upa_mode": "channel"
+            },
+            "inference_args": {
+                "output_folder": "Old-blended",
+                "timesteps": [100],
+                "use_rough_edge_mask": [true, false]
+            },
+            "experiment": {
+                "parent": "PlanetDiffusion",
+                "output_size": 1024
+            }
+        },
+        "Old-blended-25": {
+            "inference_args": {
+                "output_folder": "Old-blended-25",
+                "timesteps": [10, 25]
+            },
+            "experiment": {
+                "parent": "Old-blended"
+            }
+        },
+        "Old-blended-50": {
+            "inference_args": {
+                "output_folder": "Old-blended-50",
+                "timesteps": [50]
+            },
+            "experiment": {
+                "parent": "Old-blended"
+            }
+        },
+        "Old-blended-100-regular": {
+            "inference_args": {
+                "output_folder": "Old-blended-100-regular",
+                "use_rough_edge_mask": false,
+                "timesteps": [100]
+            },
+            "experiment": {
+                "parent": "Old-blended"
+            }
+        },
+        "Old-blended-100-irregular": {
+            "inference_args": {
+                "output_folder": "Old-blended-100-irregular",
+                "use_rough_edge_mask": true,
+                "timesteps": [100]
+            },
+            "experiment": {
+                "parent": "Old-blended"
+            }
+        },
+        "Old-blended-250": {
+            "inference_args": {
+                "output_folder": "Old-blended-250",
+                "timesteps": [250]
+            },
+            "experiment": {
+                "parent": "Old-blended"
+            }
+        },
+        "Fine-real": {
+            "inference_args": {
+                "output_folder": "Fine-real",
+                "tile_size": 256,
+                "timesteps": 100,
+                "guidance_scale": [1.0, 3.0],
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-5-fine-tuned"
+            }
+        },
+        "Old-real": {
+            "inference_args": {
+                "output_folder": "Old-real-new",
+                "tile_size": 256,
+                "timesteps": [250],
+                "guidance_scale": [2.0],
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "PlanetDiffusion"
+            }
+        },
+        "Old-real-low-t": {
+            "inference_args": {
+                "output_folder": "Old-real-low-t",
+                "timesteps": [10],
+                "use_rough_edge_mask": true,
+                "guidance_scale": 2.0
+            },
+            "experiment": {
+                "parent": "Old-real"
+            }
+        },
+        "Old-real-guidance": {
+            "inference_args": {
+                "output_folder": "Old-real-guidance",
+                "timesteps": 100,
+                "guidance_scale": [1.0, 1.5, 2.0, 2.5, 3.0]
+            },
+            "experiment": {
+                "parent": "Old-real"
+            }
+        },
+        "Planet-size-5-fine-tuned-real": {
+            "inference_args": {
+                "output_folder": "Planet-size-5-fine-tuned-real",
+                "tile_size": 256,
+                "timesteps": 25,
+                "batch_size": 8
+            },
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-5-fine-tuned"
+            }
+        },
+        "Planet-size-5-upscaling": {
+            "inference_args": {
+                "output_folder": "Planet-size-5-upscaling",
+                "guidance_scale": 1.0
+            },
+            "upscaling_config": {
+                "image_mode": "sat-upscaling",
+                "size": 5,
+                "downscale_offset": 3,
+                "river_upa_mode": "channel"
+            },
+            "upscaling_args": {
+                "output_folder": "Planet-size-5-upscaling",
+                "diffusion_model_dir": "Upscaling-2-5",
+                "wandb_artifact_version": 33,
+                "timesteps": 25,
+                "guidance_channel": 4,
+                "guidance_scale": 1.0,
+                "tile_size": 256
+            },
+            "experiment": {
+                "do_upscaling": true,
+                "resize_factor": 0.125,
+                "parent": "Planet-size-5-fine-tuned"
+            }
+        },
+        "Planet-size-5-upscaling-real": {
+            "experiment": {
+                "output_size": null,
+                "real_sketches": true,
+                "parent": "Planet-size-5-upscaling"
+            }
+        }
+    }
+}

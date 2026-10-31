@@ -399,7 +399,7 @@ class PlanetConfig:
         }
     )
     image_mode: str = field(
-        default="planet",
+        default="sat",
         metadata={
             'choices': [
                 'planet', 'dem', 'sat', 'land', 'none', 'sketch-to-dem',
@@ -808,7 +808,7 @@ class PlanetConfig:
         }
     )
     river_upa_mode: str = field(
-        default="channel",
+        default="none",
         metadata={
             'choices': ['none', 'channel', 'injected'],
             'help': 'How to handle river UPA. "none": no river UPA, "channel": use river UPA as a channel, "injected": inject river UPA into the dem'
@@ -2027,10 +2027,6 @@ class PlanetConfig:
                         river_upa = tensor_to_np(cond[0])
                         river_upa = np_rgb(river_upa, cmap='viridis')
                         row.append(np_to_tensor(river_upa).to(device))
-                    elif "temp" in self.input_types[i]:
-                        temp = tensor_to_np(cond[0])
-                        temp = np_rgb(temp, cmap="coolwarm")
-                        row.append(np_to_tensor(temp).to(device))
                     else:
                         row.append(torch.stack(list(cond[:c])+[cond[0]]*(3-c)))
                     cond = cond[c:]
@@ -2917,7 +2913,7 @@ def get_data_image(
     data_dir: str,
     shape: tuple[int, int],
     name: str,
-    default_shape: tuple[int, int] = (8192, 16384),
+    default_shape: tuple[int, int] = (10800, 21600),
     interpolation: int = cv2.INTER_LANCZOS4,
     custom_resizer: Callable[[np.ndarray, tuple[int, int]], np.ndarray] = None,
     generator_func: Callable[(...), np.ndarray] | None = None,

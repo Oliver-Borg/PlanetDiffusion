@@ -1,4 +1,5 @@
 import json
+from ...core.model_hub import ensure_model
 from dataclasses import dataclass, field, asdict, replace
 import os
 from threading import Thread
@@ -901,6 +902,7 @@ sat_pipeline_cache = {}
 def load_pipeline(
     sat_model_path: str, wandb_artifact_name: str | None = None
 ) -> TerrainDiffusionPipeline:
+    sat_model_path = ensure_model(sat_model_path)
     if sat_model_path in sat_pipeline_cache:
         return sat_pipeline_cache[sat_model_path]
     if not os.path.exists(sat_model_path) or (os.listdir(sat_model_path) == 0):

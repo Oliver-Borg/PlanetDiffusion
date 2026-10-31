@@ -1,44 +1,45 @@
 # Authoring Terrestrial Planets with Diffusion Models
 http://doi.org/10.1111/cgf.70390
 
-This repository should be cloned with:
-```sh
-git clone git@github.com:Oliver-Borg/PlanetDiffusion.git
-```
+Forked from "Evaluating Diffusion Models for Terrain Generation". Planned work is tracked in [ROADMAP.md](ROADMAP.md).
 
 ## Setup
 
-- Install Python 3.10
-    - Doing this through Anaconda is the easiest.
+The environment is managed with conda (packages come from conda-forge). Linux with an NVIDIA GPU is the supported platform; Windows is experimental and macOS is not supported.
 
-- Linux/mac:
 ```sh
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements_frozen.txt
+conda env create -f environment.yml
+conda activate planet-diffusion
 ```
 
-- Windows:
-```cmd
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements_frozen.txt
+If conda is not installed, `./install.sh` installs Miniforge locally and creates the environment in `./.conda-env` (`install.ps1` on Windows).
+
+conda-forge selects the PyTorch CUDA build that matches the installed NVIDIA driver, so no CUDA version needs to be chosen. On a machine without a visible GPU (for example a cluster login node) it would select the CPU build. Set the CUDA version explicitly in that case:
+```sh
+CONDA_OVERRIDE_CUDA=12.8 conda env create -f environment.yml
 ```
 
-Pretrained models are available from [OneDrive](https://1drv.ms/f/s!AioW3gBJe-R6lYJeImv68fE4zwuvtw?e=212crY)
+To check the installation:
+```sh
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+```
 
-Extract the model to some directory, e.g. `~/models/Planet-size-5`. The model directory should contain a folder called final at the top level. Reference the parent folder of the final folder in the `diffusion_model_dir` argument.
+## Pretrained weights
+
+Weights are hosted at [huggingface.co/otrolie/PlanetDiffusion](https://huggingface.co/otrolie/PlanetDiffusion), one subfolder per model. They are downloaded automatically into `./models/<name>/final` the first time a model is used and the folder is missing. To download manually:
+```sh
+huggingface-cli download otrolie/PlanetDiffusion --include "PlanetDiffusion/final/*" --local-dir models
+```
+To publish a trained model, see `python -m src.misc.upload_weights --help`.
 
 ## GUI
-After activating the virtual environment, run the following Python script to start the GUI:
+With the environment activated, start the GUI:
 ```sh
-python -m src.interface.view --data_dir ./planetAI/data --size 5 --downscale_offset 5 --diffusion_model_dir "~/models/Planet-size-5"
+python -m src.interface.view --data_dir ./planetAI/data --size 5 --downscale_offset 5 --diffusion_model_dir ./models/PlanetDiffusion
 ```
 `size` is the size of the planet to generate. Size 5 has the same radius as Earth. Each step in size is a 2x increase in radius.
 `downscale_offset` is the number of steps down to the sketch size. This is used to set the resolution of the sketch.
 `diffusion_model_dir` is the directory containing the diffusion model to use.
-
-*Note:* We have recently optimized the inference pipeline significantly and added support for multi-GPU inference. These updates will be released soon.
 
 ## Training
 
@@ -58,7 +59,7 @@ python -m src.models.diffusion.train \
     --auto_num_epochs $NUM_EPOCHS \
     --tile_size 256 \
     --save_on_disk True \
-    --experiment_name Planet-size-5 \
+    --experiment_name PlanetDiffusion \
     --image_mode planet \
     --river_upa_mode channel \
     --sketch_lod_levels 2 \
@@ -137,4 +138,10 @@ for ot in "${output_types[@]}"; do
             --max_images 3000
     done
 done
+```
+
+## Docker
+
+```sh
+bash docker-build.sh   # builds the image from environment.yml (build arg CUDA_VERSION, default 12.8)
 ```

@@ -756,7 +756,6 @@ class SphereMapping:
                 atlas_x = atlas_x.astype(np.int32)
             atlas_indices = (atlas_y, atlas_x)
         discrete = discrete or self.discrete
-        atlas = self.atlas if atlas is None else atlas
         if rotation == 0:
             if atlas_indices is None:
                 atlas_y, atlas_x = self.get_tile_mapping(
@@ -764,6 +763,7 @@ class SphereMapping:
                 )
             else:
                 atlas_y, atlas_x = atlas_indices
+            atlas = self.atlas if atlas is None else atlas
             h, w = atlas.shape[:2]
             tile = np.zeros((tile_size, tile_size, self.channels), dtype=atlas.dtype)
             if discrete or np.issubdtype(atlas_y.dtype, np.integer):
@@ -1391,11 +1391,7 @@ class QuadSphere(
         bottom_face = atlas[:, -face_width:]
         for i in range(4):
             current_face = atlas[:, (i + 1) * face_width: (i + 2) * face_width]
-            stacked = (
-                np.vstack((top_face, current_face, bottom_face))
-                if i == 1 else
-                np.vstack((np.zeros_like(current_face), current_face, np.zeros_like(current_face)))
-            )
+            stacked = np.vstack((top_face, current_face, bottom_face))
             top_face = cv2.rotate(top_face, cv2.ROTATE_90_CLOCKWISE)
             bottom_face = cv2.rotate(bottom_face, cv2.ROTATE_90_COUNTERCLOCKWISE)
             atlas_3x4[:, i * face_width: (i + 1) * face_width] = stacked

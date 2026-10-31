@@ -35,6 +35,7 @@ from ...labelling.encoding import (
     PlanetStyle
 )
 from ...core.utils import exactly_one_exists, exists
+from ...core.model_hub import ensure_model
 from torchvision.transforms import ToPILImage
 from planetAI.src.data.utils import create_overlap_mask
 
@@ -154,6 +155,7 @@ class TerrainDiffusionPipeline(DiffusionPipeline):
 
     @classmethod
     def from_pretrained(cls, pretrained_model_name_or_path: Optional[Union[str, os.PathLike]], **kwargs) -> 'TerrainDiffusionPipeline':
+        pretrained_model_name_or_path = ensure_model(pretrained_model_name_or_path)
         terrain_encoder_path = os.path.join(pretrained_model_name_or_path, TERRAIN_ENCODER_FOLDER, TERRAIN_ENCODER_NAME)
         controlnet_path = os.path.join(pretrained_model_name_or_path, CONTROLNET_FOLDER)
 

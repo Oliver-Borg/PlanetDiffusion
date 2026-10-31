@@ -112,7 +112,7 @@ if __name__ == "__main__":
         planet_cfg.data_dir,
         (H, W),
         "World_DEM_WxH.png",
-        default_shape=(8192, 16384),
+        default_shape=(10800, 21600),
         interpolation=cv2.INTER_LANCZOS4,
     )
 

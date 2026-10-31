@@ -1,0 +1,54 @@
+name: planet-diffusion
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  # Core ML. conda-forge selects the CUDA build matching the installed driver (via the __cuda virtual package).
+  - pytorch
+  - torchvision
+  - torchmetrics
+  - diffusers
+  - accelerate
+  - huggingface_hub
+  - safetensors
+  - wandb
+  # Scientific / imaging
+  - numpy
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - numba
+  - networkx
+  - pillow
+  - opencv
+  - matplotlib
+  - pywavelets
+  - lpips
+  - pytorch-msssim
+  # Geospatial
+  - rasterio
+  - affine
+  - pyproj
+  - shapely
+  - geopandas
+  - pysheds
+  # Interface
+  - pyqt=5
+  - pyopengl
+  - pyrr
+  - pygame
+  - tk
+  # Utilities
+  - tqdm
+  - psutil
+  - requests
+  - line_profiler
+  - memory_profiler
+  - opensimplex
+  - pip
+  - pip:
+      - pytorch-fid
+      - torch-fidelity
+      - pymaxflow
+      - pyqtdarktheme

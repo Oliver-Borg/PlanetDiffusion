@@ -141,7 +141,7 @@ class RiverModalSketch:
             temp = cv2.resize(temp, (w, h), interpolation=cv2.INTER_NEAREST)
         
         if sat is None:
-            sat = open_image_array(os.path.join(planet_cfg.data_dir, 'world.satellite.16384x8192.png'))
+            sat = open_image_array(os.path.join(planet_cfg.data_dir, 'world.satellite.21600x10800.png'))
         sat_hex = np_rgb_to_hex(sat)
 
         mapping = {}
@@ -290,7 +290,7 @@ if __name__ == '__main__':
     temp = ((temp + 1) // temp_step).astype(np.uint8)
     temp = cv2.resize(temp, (w, h), interpolation=cv2.INTER_NEAREST)
 
-    sat = open_image_array(os.path.join(planet_cfg.data_dir, 'world.satellite.16384x8192.png'))
+    sat = open_image_array(os.path.join(planet_cfg.data_dir, 'world.satellite.21600x10800.png'))
 
     orders = [3, 4]
     distance_weights = [1, 2]

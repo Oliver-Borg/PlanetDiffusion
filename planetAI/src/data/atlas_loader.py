@@ -217,7 +217,8 @@ class AtlasLoader:
                 interpolation=cv2.INTER_AREA,
                 default_shape=(8192, 16384),
             )
-            self._downtemp[(self._downtemp < 255)] += 1
+            self._downtemp[self.downland == 0] = 0
+            self._downtemp[(self.downland > 0) & (self._downtemp < 255)] += 1
         return self._downtemp
 
     @property
@@ -230,7 +231,8 @@ class AtlasLoader:
                 interpolation=cv2.INTER_AREA,
                 default_shape=(8192, 16384),
             )
-            self._downtemp_summer[(self._downtemp_summer < 255)] += 1
+            self._downtemp_summer[self.downland == 0] = 0
+            self._downtemp_summer[(self.downland > 0) & (self._downtemp_summer < 255)] += 1
         return self._downtemp_summer
 
     @property
@@ -273,12 +275,14 @@ class AtlasLoader:
     def downtemp_sketch(self) -> np.ndarray:
         if self._downtemp_sketch is None:
             self._downtemp_sketch = temperature_paint(self.downtemp, self.planet_cfg)
+            self._downtemp_sketch[self.downland == 0] = 0
         return self._downtemp_sketch
 
     @property
     def downtemp_sketch_summer(self) -> np.ndarray:
         if self._downtemp_sketch_summer is None:
             self._downtemp_sketch_summer = temperature_paint(self.downtemp_summer, self.planet_cfg)
+            self._downtemp_sketch_summer[self.downland == 0] = 0
         return self._downtemp_sketch_summer
 
     @property

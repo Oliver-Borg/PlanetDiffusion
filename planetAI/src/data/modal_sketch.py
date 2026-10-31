@@ -394,7 +394,7 @@ class ModalSketch:
         land_step = 255 // self.planet_cfg.landcover_classes
         temp_step = 255 // self.planet_cfg.temp_classes
         landcover_sketch = translate_land(landcover_sketch) // land_step
-        temperature_sketch = (temperature_sketch) // (temp_step - 1)
+        temperature_sketch = (temperature_sketch + 1) // temp_step
         if not is_mars:
             temperature_sketch[landcover_sketch == 0] = 0
         temperature_sketch[(mars_mask > 0) & (temperature_sketch == 0)] = 3
