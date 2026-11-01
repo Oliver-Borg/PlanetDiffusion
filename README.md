@@ -1,7 +1,7 @@
 # Authoring Terrestrial Planets with Diffusion Models
 http://doi.org/10.1111/cgf.70390
 
-Forked from "Evaluating Diffusion Models for Terrain Generation". Planned work is tracked in [ROADMAP.md](ROADMAP.md).
+Forked from "Evaluating Diffusion Models for Terrain Generation".
 
 ## Setup
 
