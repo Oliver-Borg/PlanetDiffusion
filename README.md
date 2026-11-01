@@ -3,6 +3,15 @@ http://doi.org/10.1111/cgf.70390
 
 Forked from "Evaluating Diffusion Models for Terrain Generation".
 
+![Overview of the pipeline: sketches are remapped onto a quad sphere, a U-Net generates tiles that are blended and remapped to the final planet](docs/images/overview.png)
+
+Example planets generated from sketches:
+
+| | |
+|---|---|
+| ![Earth-like planet](docs/images/render_earthlike.jpg) | ![Ice planet](docs/images/render_ice.jpg) |
+| ![Mars-like planet](docs/images/render_mars.jpg) | ![Desert planet](docs/images/render_desert.jpg) |
+
 ## Setup
 
 The environment is managed with conda (packages come from conda-forge). Linux with an NVIDIA GPU is the supported platform; Windows is experimental and macOS is not supported.
